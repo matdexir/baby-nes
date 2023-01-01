@@ -496,6 +496,9 @@ impl CPU {
         } else {
             self.status.remove(CpuFlags::ZERO);
         }
+
+        self.status.set(CpuFlags::NEGATIVE, data & 0b1000_0000 > 0);
+        self.status.set(CpuFlags::OVERFLOW, data & 0b0100_0000 > 0);
     }
 
     pub fn run(&mut self) {
