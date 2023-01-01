@@ -479,6 +479,14 @@ impl CPU {
         self.status.insert(CpuFlags::BREAK2);
     }
 
+    fn php(&mut self) {
+        // READ this in the future: http://wiki.nesdev.com/w/index.php/CPU_status_flag_behavior
+        let mut flags = self.status.clone();
+        flags.insert(CpuFlags::BREAK);
+        flags.insert(CpuFlags::BREAK2);
+        self.stack_push(flags.bits());
+    }
+
     pub fn run(&mut self) {
         let ref opcodes: HashMap<u8, &'static opcodes::OpCode> = *opcodes::OPCODES_MAP;
         loop {
