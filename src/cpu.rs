@@ -501,6 +501,18 @@ impl CPU {
         self.status.set(CpuFlags::OVERFLOW, data & 0b0100_0000 > 0);
     }
 
+    fn compare(&mut self, mode: &AddressingMode, compare_with: u8) {
+        let addr = self.get_operand_address(mode);
+        let data = self.mem_read(addr);
+        if data <= compare_with {
+            self.status.insert(CpuFlags::CARRY);
+        } else {
+            self.status.remove(CpuFlags::CARRY);
+        }
+
+        self.update_zero_and_negative_flags(data);
+    }
+
     pub fn run(&mut self) {
         let ref opcodes: HashMap<u8, &'static opcodes::OpCode> = *opcodes::OPCODES_MAP;
         loop {
