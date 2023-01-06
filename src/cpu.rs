@@ -525,12 +525,12 @@ impl CPU {
     }
 
     pub fn run(&mut self) {
-        self.run_with_callback(|| {});
+        self.run_with_callback(|_| {});
     }
 
     pub fn run_with_callback<F>(&mut self, mut callback: F)
     where
-        F: FnMut(),
+        F: FnMut(&mut CPU),
     {
         let ref opcodes: HashMap<u8, &'static opcodes::OpCode> = *opcodes::OPCODES_MAP;
         loop {
