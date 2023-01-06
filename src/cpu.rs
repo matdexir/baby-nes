@@ -530,7 +530,7 @@ impl CPU {
 
     pub fn run_with_callback<F>(&mut self, mut callback: F)
     where
-        F: FnMut,
+        F: FnMut(),
     {
         let ref opcodes: HashMap<u8, &'static opcodes::OpCode> = *opcodes::OPCODES_MAP;
         loop {
@@ -659,7 +659,7 @@ impl CPU {
                         let hi = self.mem_read(mem_address & 0xFF00);
                         (hi as u16) << 8 | (lo as u16)
                     } else {
-                        self.mem_read_u16(mem_address);
+                        self.mem_read_u16(mem_address)
                     };
                     self.program_counter = indirect_ref;
                 }
