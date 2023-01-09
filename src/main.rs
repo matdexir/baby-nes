@@ -40,6 +40,7 @@ fn read_screen_state(cpu: &CPU, frame: &mut [u8; 32 * 3 * 32]) -> bool {
             frame[frame_idx] = b1;
             frame[frame_idx + 1] = b2;
             frame[frame_idx + 2] = b3;
+            update = true
         }
         frame_idx += 3;
     }
@@ -141,7 +142,9 @@ fn main() {
     let mut rng = rand::thread_rng();
 
     // run the game cycle
+    // println!("here");
     cpu.run_with_callback(move |cpu| {
+        // println!("running");
         handle_user_input(cpu, &mut event_pump);
         cpu.mem_write(0xFE, rng.gen_range(1..16));
 
@@ -152,5 +155,6 @@ fn main() {
             canvas.present();
         }
         ::std::thread::sleep(Duration::new(0, 70_000))
-    })
+    });
+    // println!("done");
 }
