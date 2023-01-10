@@ -27,6 +27,10 @@ use crate::cpu::Mem;
 // |_ _ _ _ _ _ _ _| $0100 |               |
 // | Zero Page     |       |               |
 // |_______________| $0000 |_______________|
+const RAM: u16 = 0x0000;
+const RAM_MIRRORS_END: u16 = 0x1FFF;
+const PPU_REGISTERS: u16 = 0x2000;
+const PPU_REGISTERS_MIRRORS_END: u16 = 0x3FFF;
 
 pub struct Bus {
     cpu_vram: [u8; 2048],
@@ -39,11 +43,6 @@ impl Bus {
         }
     }
 }
-
-const RAM: u16 = 0x0000;
-const RAM_MIRRORS_END: u16 = 0x1FFF;
-const PPU_REGISTERS: u16 = 0x2000;
-const PPU_REGISTERS_MIRRORS_END: u16 = 0x3FFF;
 
 impl Mem for Bus {
     fn mem_read(&self, addr: u16) -> u8 {
