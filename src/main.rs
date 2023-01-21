@@ -101,6 +101,7 @@ fn main() {
         .position_centered()
         .build()
         .unwrap();
+    // println!("sdl did not init");
 
     let mut canvas = window.into_canvas().present_vsync().build().unwrap();
     let mut event_pump = sdl_ctx.event_pump().unwrap();

@@ -39,7 +39,7 @@ pub struct CPU {
     pub program_counter: u16,
     pub stack_pointer: u8,
     pub bus: Bus,
-    memory: [u8; 0xFFFF],
+    // memory: [u8; 0xFFFF],
 }
 
 #[derive(Debug)]
@@ -103,7 +103,7 @@ impl CPU {
             status: CpuFlags::from_bits_truncate(0b100100),
             program_counter: 0,
             bus,
-            memory: [0; 0xFFFF],
+            // memory: [0; 0xFFFF],
         }
     }
     fn get_operand_address(&self, mode: &AddressingMode) -> u16 {
