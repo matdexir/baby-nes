@@ -39,7 +39,7 @@ pub struct CPU {
     pub program_counter: u16,
     pub stack_pointer: u8,
     pub bus: Bus,
-    memory: [u8; 0xFFFF],
+    // memory: [u8; 0xFFFF],
 }
 
 #[derive(Debug)]
